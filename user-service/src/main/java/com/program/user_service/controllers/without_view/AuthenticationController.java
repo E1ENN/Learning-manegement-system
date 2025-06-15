@@ -14,7 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
-@RestController
+@RestController("authControllerWithoutView")
 @RequestMapping("/non-view/auth")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class AuthenticationController {

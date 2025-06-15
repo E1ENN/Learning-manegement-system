@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@RestController("roleControllerWithoutView")
 @RequestMapping("/non-view/api/roles")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class RoleController {

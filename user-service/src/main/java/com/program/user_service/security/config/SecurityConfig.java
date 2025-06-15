@@ -42,9 +42,10 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.POST, "/roles/create").permitAll()
                         .requestMatchers(HttpMethod.DELETE, "/roles/delete").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/auth/*").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/*").permitAll()
                         .requestMatchers("/users/profile/*").authenticated()
-                        .requestMatchers("/api/roles/**").hasRole("ADMIN")
+                        .requestMatchers("/api/roles/**").permitAll()
                         .anyRequest().authenticated())
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .formLogin(AbstractHttpConfigurer::disable)

@@ -16,7 +16,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import java.nio.file.AccessDeniedException;
 
-@RestController
+@RestController("userControllerWithoutView")
 @RequestMapping("/non-view/users/profile")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Validated

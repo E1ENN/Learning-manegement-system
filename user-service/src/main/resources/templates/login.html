@@ -6,7 +6,18 @@
 </head>
 <body>
     <h1>Login</h1>
-    <form th:action="@{/auth/login}" method="post">
+    <form th:action="@{/auth/login}" th:object="${loginRequest}" method="post">
+        <div>
+            <label>Email:</label>
+            <input type="text" th:field="*{email}" placeholder="Enter email" required />
+            <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+        </div>
+        <div>
+            <label>Password:</label>
+            <input type="password" th:field="*{password}" placeholder="Enter password" required />
+            <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+        </div>
+        <button type="submit">Login</button>
     </form>
 </body>
 </html>

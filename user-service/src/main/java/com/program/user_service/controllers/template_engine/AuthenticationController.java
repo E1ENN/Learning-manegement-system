@@ -37,7 +37,7 @@ public class AuthenticationController {
                            Model model) {
         log.info("Register request received: {}", request);
         if (bindingResult.hasErrors()) {
-            return "validation_errors";
+            return "registration";
         }
         AuthenticationResponse response = authenticationService.register(request);
         model.addAttribute("authResponse", response);
@@ -46,14 +46,17 @@ public class AuthenticationController {
 
     @GetMapping("/login")
     public String loginForm(Model model) {
-        model.addAttribute("loginRequest");
+        model.addAttribute("loginRequest", new LoginRequest());
         return "login";
     }
 
     @PostMapping("/login")
-    public String login(@Valid @ModelAttribute LoginRequest request,
+    public String login(@Valid @ModelAttribute("loginRequest") LoginRequest request,
                         BindingResult bindingResult,
                         Model model) {
+        if (bindingResult.hasErrors()) {
+            return "login";
+        }
         AuthenticationResponse response = authenticationService.login(request);
         model.addAttribute("authResponse", response);
         return "login";
