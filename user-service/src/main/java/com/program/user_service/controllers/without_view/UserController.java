@@ -1,4 +1,4 @@
-package com.program.user_service.controllers;
+package com.program.user_service.controllers.without_view;
 
 import com.program.user_service.entities.support_entities.request_entities.ChangePasswordRequest;
 import com.program.user_service.entities.support_entities.request_entities.UpdateRequest;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.nio.file.AccessDeniedException;
 
 @RestController
-@RequestMapping("/users/profile")
+@RequestMapping("/non-view/users/profile")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Validated
 public class UserController {

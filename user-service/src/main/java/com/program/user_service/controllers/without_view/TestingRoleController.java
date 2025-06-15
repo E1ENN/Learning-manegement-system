@@ -1,4 +1,4 @@
-package com.program.user_service.controllers;
+package com.program.user_service.controllers.without_view;
 
 import com.program.user_service.entities.db_entities.Role;
 import com.program.user_service.entities.support_entities.request_entities.RoleCreateRequest;
@@ -11,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/roles")
+@RequestMapping("/non-view/roles")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class TestingRoleController {
 
