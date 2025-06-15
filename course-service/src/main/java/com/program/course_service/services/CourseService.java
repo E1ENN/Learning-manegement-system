@@ -47,6 +47,7 @@ public class CourseService {
         List<Course> courses = courseRepository.findAll();
         List<CourseResponse> responses = new ArrayList<>();
         courses.forEach(course -> responses.add(createCourseResponse(course)));
+        if (courses.isEmpty()) throw new EntityNotFoundException("Not yet courses");
         return responses;
     }
 
@@ -86,9 +87,15 @@ public class CourseService {
     @Transactional
     public CourseResponse updateCourse(Long id, UpdateCourseRequest request) {
         Course course = getCourseByIdFromDB(id);
-        if (request.getTitle() != null) course.setTitle(request.getTitle());
+        if (request.getTitle() != null) {
+            if (courseRepository.existsByTitle(request.getTitle()))
+                throw new DataIntegrityViolationException("The course with title: " +
+                    request.getTitle() + " already exist");
+            course.setTitle(request.getTitle());
+        }
         if (request.getDescription() != null) course.setDescription(request.getDescription());
         if (request.getCategory() != null) course.setCategory(request.getCategory());
+        if (request.getPrice() != null) course.setPrice(request.getPrice());
         if (request.getTeacherId() != null) {
             course.setTeacherId(validateTeacherAccessibility(request.getTeacherId()));
         }
@@ -128,8 +135,10 @@ public class CourseService {
 
     @Transactional
     public List<CourseResponse> getCoursesByTeacher(Long teacherId) {
-        return courseRepository.findByTeacherId(teacherId).stream()
+        List<CourseResponse> courses = courseRepository.findByTeacherId(teacherId).stream()
                 .map(this::createCourseResponse)
                 .toList();
+        if (courses.isEmpty()) throw new EntityNotFoundException("This author doesn't have any courses yet");
+        return courses;
     }
 }

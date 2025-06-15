@@ -42,8 +42,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.POST, "/roles/create").permitAll()
                         .requestMatchers(HttpMethod.DELETE, "/roles/delete").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/auth/*").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/*").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/non-view/auth/*").permitAll()
                         .requestMatchers("/users/profile/*").authenticated()
                         .requestMatchers("/api/roles/**").permitAll()
                         .anyRequest().authenticated())
